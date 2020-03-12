@@ -12,7 +12,7 @@ public class FileUploadModalTests extends BaseTest {
         //click 'Start'
         fileUploadModal.openPage();
         fileUploadModal.fileUploadModalOpen();
-        fileUploadModal.uploadFile();
+        fileUploadModal.uploadFile("src/main/resources/Homework1.docx");
         fileUploadModal.startClick();
     }
 
@@ -21,7 +21,8 @@ public class FileUploadModalTests extends BaseTest {
     public void uploadFiles() {
         fileUploadModal.openPage();
         fileUploadModal.fileUploadModalOpen();
-        fileUploadModal.uploadFiles();
+        fileUploadModal.uploadFile("src/main/resources/Homework1.docx",
+                "src/main/resources/Homework2.docx");
         fileUploadModal.startClick();
     }
 }

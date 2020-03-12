@@ -1,6 +1,8 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -84,12 +86,26 @@ public class ChatPage extends BasePage {
             e.printStackTrace();
         }
         List<WebElement> messages = driver.findElements(By.cssSelector(".integri-chat-message-text")); //ищем все сообщеньки в чате (надо знать, сколько их)
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector(".integri-chat-message-text"), 2));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("fff")));
+                //рекомендуется, находим элемент, ожидаем что будет виден
+        //ждем пока появится элемент (или исчезнет - Invisibility)
+        wait.until(ExpectedConditions.attributeContains(By.id("nnn"), "value", "person name"));
+        //ждем пока аттрибут не примет такое-то значение
+
+        //wait.until(ExpectedConditions.numberOfElementsToBe());
+
+
+
         boolean isExist = messages.get(messageIndex - 1).getText().equals(text);
         assertTrue(isExist, "Message does not exist");
+
     }
 
     public void clickInviteButton() {
         driver.findElement(By.id("invite-users-to-chat")).click();
+
     }
 
     public void clipboardShouldContainCurrentUrl() {

@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.ChatPage;
-import pages.FileUploadModal;
-import pages.SettingsModal;
+import pages.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +13,9 @@ public class BaseTest {
     ChatPage chatPage;
     FileUploadModal fileUploadModal;
     SettingsModal settingsModal;
+    Registration registration;
+    LoginPage loginPage;
+    ProjectsPage projectsPage;
 
     @BeforeMethod
     public void setDriver(){
@@ -26,10 +27,13 @@ public class BaseTest {
         chatPage = new ChatPage(driver); //инициализировали страницу (объект класса ChatPage)
         fileUploadModal = new FileUploadModal(driver);
         settingsModal = new SettingsModal(driver);
+        registration = new Registration(driver);
+        loginPage = new LoginPage(driver);
+        projectsPage = new ProjectsPage(driver);
     }
 
     @AfterMethod (alwaysRun = true)
     public void closeDriver(){
-        driver.quit();
+//        driver.quit();
     }
 }

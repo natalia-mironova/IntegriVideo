@@ -18,16 +18,11 @@ public class FileUploadModal extends BasePage {
         driver.findElement(By.cssSelector(".integri-chat-manual-upload.integri-pointer")).click();
     }
 
-    public void uploadFile() {
+    public void uploadFile(String... files) {
         WebElement upload = driver.findElement(By.cssSelector("[accept='*']"));
-        upload.sendKeys("C:/Users/Lenovo/IdeaProjects/IntegriVideo/src/main/resources/Homework1.docx");
-        //НЕ работает с относительным путем "src/main/resources/bug.jpg"
-    }
-
-    public void uploadFiles() {
-        WebElement upload = driver.findElement(By.cssSelector("[accept='*']"));
-        upload.sendKeys("C:/Users/Lenovo/IdeaProjects/IntegriVideo/src/main/resources/Homework1.docx");
-        upload.sendKeys("C:/Users/Lenovo/IdeaProjects/IntegriVideo/src/main/resources/Homework2.docx");
+        for(int i = 0; i < files.length; i ++) {
+            upload.sendKeys(System.getProperty("user.dir") + files[i]);
+        }
     }
 
     public void startClick() {
