@@ -11,8 +11,14 @@ public class SettingsModal extends BasePage {
         super(driver);
     }
 
-    public void openPage() {
+    @Override
+    public SettingsModal isPageOpened() {
+        return null;
+    }
+
+    public SettingsModal openPage() {
         driver.get("https://dev.integrivideo.com/demo/chat/new");
+        return this;
     }
 
     public void openSettingsModal() {

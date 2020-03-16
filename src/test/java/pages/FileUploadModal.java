@@ -10,8 +10,14 @@ public class FileUploadModal extends BasePage {
         super(driver);
     }
 
-    public void openPage() {
+    @Override
+    public FileUploadModal isPageOpened() {
+        return null;
+    }
+
+    public FileUploadModal openPage() {
         driver.get("https://dev.integrivideo.com/demo/chat/new");
+        return this;
     }
 
     public void fileUploadModalOpen() {

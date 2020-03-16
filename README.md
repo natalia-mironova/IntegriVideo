@@ -1,8 +1,8 @@
 1. Register an account DONE
 2. Login as existing user DONE
 3. Create a new project DONE
-4. Edit project IN PROGRESS
-5. Add more domains, count domains
+4. Edit project DONE
+5. Add more domains, count domains DONE
 6. Remove domains
 7. Create more projects, count projects
 8. Add Component type1
