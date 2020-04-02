@@ -1,10 +1,12 @@
 package tests;
 
+import Steps.LoginSteps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
+import utils.CapabilitiesGenerator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,11 +18,12 @@ public class BaseTest {
     Registration registration;
     LoginPage loginPage;
     ProjectsPage projectsPage;
+    protected LoginSteps steps;
 
-    @BeforeMethod
-    public void setDriver(){
+    @BeforeMethod(description = "Opening Chrome Driver")
+    public void setDriver() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
@@ -30,10 +33,11 @@ public class BaseTest {
         registration = new Registration(driver);
         loginPage = new LoginPage(driver);
         projectsPage = new ProjectsPage(driver);
+        steps = new LoginSteps(driver);
     }
 
-    @AfterMethod (alwaysRun = true)
-    public void closeDriver(){
-//        driver.quit();
+    @AfterMethod(alwaysRun = true, description = "Closing Chrome Driver")
+    public void closeDriver() {
+        driver.quit();
     }
 }

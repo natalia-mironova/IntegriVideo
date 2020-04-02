@@ -49,6 +49,8 @@ public class ChatTests extends BaseTest {
         chatPage.openPage();
         chatPage.writeText("Natalia");
         chatPage.clickSend();
+        chatPage.writeText("SecondMessage");
+        chatPage.clickSend();
         chatPage.editMessage();
     }
 
@@ -92,9 +94,15 @@ public class ChatTests extends BaseTest {
     @Test
     //ПРОВЕРИТЬ РАБОТУ КНОПКИ С КОДОМ
     //А ЧТО ДОЛЖНА ДЕЛАТЬ КНОПКА С КОДОМ?
-    public void codeCopy() {
+    public void copyCode() {
         chatPage.openPage();
-        chatPage.codeCopy();
+        chatPage.copyCode();
+    }
+
+    //передать креды мавеном
+    @Test
+    public void runTest() {
+        System.out.println(System.getProperty("username"));
     }
 
 }

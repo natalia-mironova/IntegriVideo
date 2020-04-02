@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.*;
@@ -22,14 +21,18 @@ public class ChatPage extends BasePage {
     }
 
     @Override
-    public ChatPage isPageOpened() {
+    public BasePage isPageOpened() {
         return null;
     }
 
-    public ChatPage openPage() {
-        driver.get("https://dev.integrivideo.com/demo/chat/new");
-        return this;
+    @Override
+    public BasePage openPage() {
+        return null;
     }
+
+//    public void openPage() {
+//        driver.get("https://dev.integrivideo.com/demo/chat/new");
+//    }
 
     public void writeText(String text) {
         driver.findElement(CHAT_INPUT).sendKeys(text);
@@ -37,13 +40,10 @@ public class ChatPage extends BasePage {
 
     public void writeText11Times(String text) {
         for (int i = 0; i < 11; i++) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             driver.findElement(CHAT_INPUT).sendKeys(text);
             clickSend();
+            wait.until(ExpectedConditions.textToBe(CHAT_INPUT, "Start typing here"));
+            //не работает
         }
     }
 
@@ -54,7 +54,6 @@ public class ChatPage extends BasePage {
 
     public void clickSend() {
         driver.findElement(By.className("iv-icon-paper-plane")).click(); //значок отправить
-        //driver.findElement(By.cssSelector(".integri-chat-send-message")); // или так
     }
 
     public void tapEnter() {
@@ -62,9 +61,10 @@ public class ChatPage extends BasePage {
     }
 
     public void editMessage() {
-        driver.findElement(By.cssSelector(".iv-icon.iv-icon-pencil.integri-chat-edit-message")).click();
+        List <WebElement> editMessageElement = driver.findElements(By.cssSelector(".iv-icon.iv-icon-pencil.integri-chat-edit-message"));
+        editMessageElement.get(0).click();
         driver.findElement(By.cssSelector("textarea")).sendKeys(Keys.CONTROL, "a" + Keys.DELETE);
-        driver.findElement(By.cssSelector("textarea")).sendKeys("Edited");
+        driver.findElement(By.cssSelector("textarea")).sendKeys("Second Message Edited");
         driver.findElement(By.cssSelector("textarea")).sendKeys(Keys.ENTER);
     }
 
@@ -92,26 +92,12 @@ public class ChatPage extends BasePage {
             e.printStackTrace();
         }
         List<WebElement> messages = driver.findElements(By.cssSelector(".integri-chat-message-text")); //ищем все сообщеньки в чате (надо знать, сколько их)
-        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector(".integri-chat-message-text"), 2));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("fff")));
-                //рекомендуется, находим элемент, ожидаем что будет виден
-        //ждем пока появится элемент (или исчезнет - Invisibility)
-        wait.until(ExpectedConditions.attributeContains(By.id("nnn"), "value", "person name"));
-        //ждем пока аттрибут не примет такое-то значение
-
-        //wait.until(ExpectedConditions.numberOfElementsToBe());
-
-
-
         boolean isExist = messages.get(messageIndex - 1).getText().equals(text);
         assertTrue(isExist, "Message does not exist");
-
     }
 
     public void clickInviteButton() {
         driver.findElement(By.id("invite-users-to-chat")).click();
-
     }
 
     public void clipboardShouldContainCurrentUrl() {
@@ -129,7 +115,7 @@ public class ChatPage extends BasePage {
         }
     }
 
-    public void codeCopy() {
+    public void copyCode() {
         driver.findElement(By.cssSelector(".component-code")).click();
     }
 }
