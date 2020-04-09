@@ -1,8 +1,10 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class Chat extends BeforeAfter {
+    @Ignore
     @Test
     public void chat() {
         browser.get("https://dev.integrivideo.com/demo/5e5ba38d46d9274aec5167db");
