@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.*;
@@ -26,13 +27,14 @@ public class ChatPage extends BasePage {
     }
 
     @Override
-    public BasePage openPage() {
-        return null;
-    }
-
-//    public void openPage() {
-//        driver.get("https://dev.integrivideo.com/demo/chat/new");
+//    public BasePage openPage() {
+//        return null;
 //    }
+
+    public BasePage openPage() {
+        driver.get("https://dev.integrivideo.com/demo/chat/new");
+        return this;
+    }
 
     public void writeText(String text) {
         driver.findElement(CHAT_INPUT).sendKeys(text);
@@ -42,7 +44,8 @@ public class ChatPage extends BasePage {
         for (int i = 0; i < 11; i++) {
             driver.findElement(CHAT_INPUT).sendKeys(text);
             clickSend();
-            wait.until(ExpectedConditions.textToBe(CHAT_INPUT, "Start typing here"));
+            WebElement a = driver.findElement(By.xpath("//tag[contains(text(),'text')]"));
+            wait.until(ExpectedConditions.visibilityOf(a));
             //не работает
         }
     }
@@ -61,7 +64,7 @@ public class ChatPage extends BasePage {
     }
 
     public void editMessage() {
-        List <WebElement> editMessageElement = driver.findElements(By.cssSelector(".iv-icon.iv-icon-pencil.integri-chat-edit-message"));
+        List<WebElement> editMessageElement = driver.findElements(By.cssSelector(".iv-icon.iv-icon-pencil.integri-chat-edit-message"));
         editMessageElement.get(0).click();
         driver.findElement(By.cssSelector("textarea")).sendKeys(Keys.CONTROL, "a" + Keys.DELETE);
         driver.findElement(By.cssSelector("textarea")).sendKeys("Second Message Edited");
