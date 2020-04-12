@@ -1,5 +1,7 @@
 package tests;
 
+import org.testng.ITestContext;
+import org.testng.annotations.Listeners;
 import steps.LoginSteps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +12,9 @@ import utils.CapabilitiesGenerator;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners(TestListener.class)
 public class BaseTest {
+
     private WebDriver driver;
     ChatPage chatPage;
     FileUploadModal fileUploadModal;
@@ -21,11 +25,14 @@ public class BaseTest {
     protected LoginSteps steps;
 
     @BeforeMethod(description = "Opening Chrome Driver")
-    public void setDriver() {
+    public void setDriver(ITestContext context) {
+        //adding ITestContext context for IListener (screenshots)
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        //adding context for taking screenshots
+        context.setAttribute("driver", driver);
 
         chatPage = new ChatPage(driver); //инициализировали страницу (объект класса ChatPage)
         fileUploadModal = new FileUploadModal(driver);

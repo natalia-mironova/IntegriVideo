@@ -13,7 +13,7 @@ public class LoginTests extends BaseTest {
     public void loginIntoAccount() {
         steps.loginIntoAccountStep("natalia16@mailinator.com", "admin123");
 
-        //The following was used when we did not us Steps
+        //The following was used when we did not use Steps
 //        loginPage
 //                .openLoginPage()
 //                .enterEmail("natalia16@mailinator.com")
@@ -30,7 +30,7 @@ public class LoginTests extends BaseTest {
         steps.loginIntoAccountStep("natalia16@mailinator.com", "admin123");
         steps.loginValidationStep();
 
-        //The following was used when we did not us Steps
+        //The following was used when we did not use Steps
 //        loginIntoAccount();
 //        loginPage.checkSuccessfulLogin();
     }
