@@ -12,9 +12,11 @@ import java.util.UUID;
 import static org.testng.Assert.assertTrue;
 
 public class Registration extends BasePage {
+
     public Registration(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        // added so that PageFactory can be used
     }
 
     @FindBy(name = "email")
@@ -40,18 +42,18 @@ public class Registration extends BasePage {
         return this;
     }
 
-//    public void register() {
-//        registerEmail.sendKeys(UUID.randomUUID().toString() + "@mailinator.com");
-//        registerPassword.sendKeys("admin123");
-//        driver.switchTo().frame(driver.findElement(By.xpath("//div[contains(@class,'g-recaptcha')]//iframe")));
-//        reCaptcha.click();
-//        driver.switchTo().defaultContent();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        registerClick.click();
-//        assertTrue(notification.isDisplayed(), "Message is not displayed");
-//    }
+    public void register() {
+        registerEmail.sendKeys(UUID.randomUUID().toString() + "@mailinator.com");
+        registerPassword.sendKeys("admin123");
+        driver.switchTo().frame(driver.findElement(By.xpath("//div[contains(@class,'g-recaptcha')]//iframe")));
+        reCaptcha.click();
+        driver.switchTo().defaultContent();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        registerClick.click();
+        assertTrue(notification.isDisplayed(), "Message is not displayed");
+    }
 }
