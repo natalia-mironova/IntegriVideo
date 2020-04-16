@@ -7,7 +7,7 @@ public class RegistrationTests extends BaseTest {
     public void registerAccount() {
         registration.openPage();
         registration.isPageOpened();
-        registration.register();
+//        registration.register();
 // Not able to bypass reCaptcha = disabling the step
 
     }
